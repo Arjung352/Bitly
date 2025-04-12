@@ -14,16 +14,21 @@ function Navbar() {
             />
           </li>
           <li className="cursor-pointer">
-            <a href="#UrlShortner">Url Shortner</a>
+            <a href="/#UrlShortner">Url Shortner</a>
           </li>
           <li className="cursor-pointer">
-            <a href="#KnowMore">Know More</a>
+            <a href="/#KnowMore">Know More</a>
           </li>
-          <li className="cursor-pointer">Dashboard</li>
+          <li className="cursor-pointer">
+            <Link to={"/Dashboard"}>Dashboard</Link>
+          </li>
           <li>
-            <button className="cursor-pointer py-1 px-4 border-2 border-white rounded-xl text-lg text-white font-semibold">
+            <Link
+              to={"/Login"}
+              className="cursor-pointer py-1 px-4 border-2 border-white rounded-xl text-lg text-white font-semibold"
+            >
               Log in
-            </button>
+            </Link>
           </li>
         </ul>
       </div>
