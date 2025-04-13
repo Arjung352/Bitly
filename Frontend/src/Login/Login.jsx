@@ -1,14 +1,19 @@
 import { TextField } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
+import LoadingSpinner from "../main/LoadingSpinner";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../Redux/Slice/UserSlice";
+import { useNavigate } from "react-router-dom";
+import { red } from "@mui/material/colors";
 
 function Login() {
-  const redirectToHome = useNavigate();
+  const dispatch = useDispatch();
+  const redirect = useNavigate();
   const [formData, setFormData] = useState({
     Email: "",
-    password: "",
+    Password: "",
   });
   const [load, setLoad] = useState(false);
   const handleInputChange = (e) => {
@@ -19,24 +24,20 @@ function Login() {
     e.preventDefault();
     setLoad(true);
     axios
-      .post("https://blogapi-sooty.vercel.app/register/login", formData)
+      .post("http://localhost:5000/checkUser/login", formData)
       .then((response) => {
-        localStorage.setItem("Email", response.data.Email);
-        localStorage.setItem("_id", response.data._id);
-        setFormData({ Email: "", password: "" });
+        setFormData({ Email: "", Password: "" });
+        localStorage.setItem("Email", formData.Email);
+        dispatch(loginUser());
         toast.success("Login succesfully!");
-        redirectToHome("/home");
         setLoad(false);
+        redirect("/");
       })
       .catch((error) => {
-        setFormData({ Email: "", password: "" });
+        setFormData({ Email: "", Password: "" });
         toast.error("Email or Password is Incorrect");
         setLoad(false);
       });
-  };
-  const navigate = useNavigate();
-  const signup = () => {
-    navigate("/");
   };
   return (
     <div className="flex flex-col items-center justify-center h-svh backGround-Gradient-Light">
@@ -69,24 +70,16 @@ function Login() {
             type="password"
             required
             onChange={handleInputChange}
-            value={formData.password}
-            name="password"
+            value={formData.Password}
+            name="Password"
             fullWidth
           />
           <button
             type="submit"
-            className="w-full font-sans  py-[0.6rem] bg-gradient-to-r from-black via-blue-800 to-black text-white rounded-lg px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full font-sans py-[0.6rem] bg-gradient-to-r from-black via-blue-800 to-black text-white rounded-lg px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-center items-center"
           >
             {load ? (
-              <TailSpin
-                height="25"
-                width="25"
-                color="#23c55e"
-                ariaLabel="tail-spin-loading"
-                radius="2"
-                wrapperStyle={{ display: "inline-block" }}
-                visible={true}
-              />
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
             ) : (
               <p>Log-in</p>
             )}

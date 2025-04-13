@@ -3,11 +3,29 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../Redux/Slice/UserSlice";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const handleScrollOrRedirect = (sectionId) => {
+    if (location.pathname !== "/") {
+      navigate("/", { replace: false }); // Route to home page first
+      // Delay scroll until the next render
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        section?.scrollIntoView({ behavior: "smooth" });
+      }, 100); // Small delay to allow rendering
+    } else {
+      const section = document.getElementById(sectionId);
+      section?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const isUserLoggedIn = useSelector((state) => state.user.isUserLoggedIn);
   const LogoutUser = () => {
+    localStorage.clear();
+    navigate("/login");
     dispatch(logoutUser());
   };
   return (
@@ -21,12 +39,19 @@ function Navbar() {
               className="h-26 w-26"
             />
           </li>
-          <li className="cursor-pointer">
-            <a href="/#UrlShortner">Url Shortner</a>
+          <li
+            className="cursor-pointer"
+            onClick={() => handleScrollOrRedirect("UrlShortner")}
+          >
+            Url Shortner
           </li>
-          <li className="cursor-pointer">
-            <a href="/#KnowMore">Know More</a>
+          <li
+            className="cursor-pointer"
+            onClick={() => handleScrollOrRedirect("KnowMore")}
+          >
+            Know More
           </li>
+
           <li className="cursor-pointer">
             <Link to={"/Dashboard"}>Dashboard</Link>
           </li>
