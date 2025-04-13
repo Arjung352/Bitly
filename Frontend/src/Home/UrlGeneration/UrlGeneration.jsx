@@ -1,6 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { toast, Toaster } from "react-hot-toast";
+import Qrcode from "./Qrcode/Qrcode";
+import LoadingSpinner from "../../main/LoadingSpinner";
 
 function UrlGeneration() {
+  const [inputUrl, setInputUrl] = useState("");
+  const [uniqueId, setUniqueId] = useState("");
+  const [load, setLoad] = useState(false);
+  const handleInputChange = (e) => {
+    setInputUrl(e.target.value);
+  };
+  // calling the api for conversion
+  const handleSubmit = async (e) => {
+    setLoad(true);
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/url/urlShortner",
+        {
+          url: inputUrl,
+        }
+      );
+      setUniqueId(response.data.id);
+      toast.success("Url generated succesfully");
+      setLoad(false);
+    } catch (error) {
+      setLoad(false);
+      toast.error(error);
+    }
+  };
+
   return (
     <>
       <section id="UrlShortner">
@@ -20,14 +50,24 @@ function UrlGeneration() {
                   type="text"
                   className="w-full border-2 border-gray-300 rounded mt-4 text-xl p-3 focus:border-blue-500  focus:outline-none"
                   placeholder="https://example.com/my-long-url"
+                  value={inputUrl}
+                  onChange={handleInputChange}
+                  name="Url"
+                  required
                 />
               </div>
-              <button className=" self-start text-white bg-blue-700 p-3 rounded-2xl text-lg font-bold">
-                Get your link for free -&gt;
+              <button
+                onClick={handleSubmit}
+                className="self-start text-white bg-blue-700 p-3 rounded-2xl text-lg font-bold"
+              >
+                {load ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                ) : (
+                  `Get your link for free ->`
+                )}
               </button>
             </div>
             {/* Output Div */}
-            {/* {shortenedUrl && ( */}
             <div className="mt-6 p-4 border border-gray-300 rounded-xl shadow-md bg-gray-50 flex flex-col md:flex-row items-center justify-between gap-4">
               {/* Left: Link + Copy */}
               <div className="flex flex-col w-full md:w-2/3">
@@ -38,13 +78,15 @@ function UrlGeneration() {
                   <input
                     type="text"
                     readOnly
-                    value={"https://example.com"}
+                    value={`http://localhost:5000/url/${uniqueId}`}
                     className="w-full p-2 border rounded text-gray-700 bg-white"
                   />
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText("https://example.com");
-                      alert("Link copied to clipboard!");
+                      navigator.clipboard.writeText(
+                        `http://localhost:5000/url/${uniqueId}`
+                      );
+                      toast.success("Link copied to clipboard!");
                     }}
                     className="px-4 py-2 bg-blue-700 rounded-2xl text-md font-bold text-white  hover:bg-blue-800"
                   >
@@ -52,28 +94,30 @@ function UrlGeneration() {
                   </button>
                 </div>
               </div>
-
               {/* Right: QR + Copy */}
               <div className="flex flex-col items-center">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png"
-                  alt="QR Code"
-                  className="h-24 w-24 border rounded"
-                  id="qrCodeImage"
-                />
+                <Qrcode shortUrl={`http://localhost:5000/url/${uniqueId}`} />
                 <a
-                  href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png"
-                  download="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png"
+                  // href={
+                  //   <Qrcode
+                  //     shortUrl={`http://localhost:5000/url/${uniqueId}`}
+                  //   />
+                  // }
+                  // download={
+                  //   <Qrcode
+                  //     shortUrl={`http://localhost:5000/url/${uniqueId}`}
+                  //   />
+                  // }
                   className="mt-2 inline-block px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 text-center"
                 >
                   Download QR Code
                 </a>
               </div>
             </div>
-            {/* )} */}
           </div>
         </div>
       </section>
+      <Toaster />
     </>
   );
 }
