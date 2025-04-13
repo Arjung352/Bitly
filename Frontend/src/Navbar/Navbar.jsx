@@ -1,7 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../Redux/Slice/UserSlice";
+import { useSelector } from "react-redux";
 
 function Navbar() {
+  const dispatch = useDispatch();
+  const isUserLoggedIn = useSelector((state) => state.user.isUserLoggedIn);
+  const LogoutUser = () => {
+    dispatch(logoutUser());
+  };
   return (
     <nav>
       <div className="bg-[#061d39]  flex justify-center h-20 items-center">
@@ -23,12 +31,21 @@ function Navbar() {
             <Link to={"/Dashboard"}>Dashboard</Link>
           </li>
           <li>
-            <Link
-              to={"/Login"}
-              className="cursor-pointer py-1 px-4 border-2 border-white rounded-xl text-lg text-white font-semibold"
-            >
-              Log in
-            </Link>
+            {isUserLoggedIn ? (
+              <button
+                onClick={() => LogoutUser()}
+                className="cursor-pointer py-1 px-4 border-2 border-white rounded-xl text-lg text-white font-semibold"
+              >
+                Log out
+              </button>
+            ) : (
+              <Link
+                to={"/Login"}
+                className="cursor-pointer py-1 px-4 border-2 border-white rounded-xl text-lg text-white font-semibold"
+              >
+                Log in
+              </Link>
+            )}
           </li>
         </ul>
       </div>
