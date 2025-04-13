@@ -10,11 +10,12 @@ const urlSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    deviceType: {
-      type: String,
-      required: true,
-    },
-    visitHistory: [{ timestamp: { type: Number } }],
+    visitHistory: [
+      {
+        timestamp: { type: Number },
+        deviceType: { type: String, required: true },
+      },
+    ],
   },
   { timestamps: true }
 );
