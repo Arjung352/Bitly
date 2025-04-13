@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from "react";
 import Pagination from "./Pagination";
-function Table() {
+
+function Table({ userData }) {
+  // pagination logic
   const [currentPage, setCurrentPage] = useState(1);
   const [tableData, setTableData] = useState([]);
-  const [rowPerPage, setRowPerPage] = useState(5);
-
+  const [rowPerPage, setRowPerPage] = useState(4);
   const lastRowIndex = currentPage * rowPerPage;
   const firstRowIndex = lastRowIndex - rowPerPage;
   const currentRow = tableData.slice(firstRowIndex, lastRowIndex);
 
-  // Sample dummy data
   useEffect(() => {
-    const dummyData = Array.from({ length: 20 }).map((_, i) => ({
-      originalUrl: `https://example.com/long-url-${i + 1}`,
-      shortUrl: `https://bit.ly/short${i + 1}`,
-      totalClicks: Math.floor(Math.random() * 100),
-      createdAt: new Date().toLocaleDateString(),
-    }));
-    setTableData(dummyData);
-  }, []);
+    if (userData && userData.length > 0) {
+      const formattedData = userData.map((data) => ({
+        originalUrl: data.redirectUrl,
+        shortUrl: `http://localhost:5000/url/${data.shortId}`,
+        totalClicks: data.visitHistory.length,
+        createdAt: new Date(data.createdAt).toLocaleDateString(),
+      }));
+      setTableData(formattedData);
+    }
+  }, [userData]);
 
   const TableRow = ({ data }) => (
     <tr className="hover:bg-gray-100 transition">
@@ -28,7 +30,7 @@ function Table() {
           {data.shortUrl}
         </a>
       </td>
-      <td className="py-3 px-4">{data.totalClicks}</td>
+      <td className="py-3 px-4 text-center">{data.totalClicks}</td>
       <td className="py-3 px-4">{data.createdAt}</td>
     </tr>
   );
@@ -40,7 +42,7 @@ function Table() {
           <tr className="bg-blue-700 text-white text-left">
             <th className="py-3 px-4">Original URL</th>
             <th className="py-3 px-4">Short URL</th>
-            <th className="py-3 px-4">Total Clicks</th>
+            <th className="py-3 px-4 text-center">Total Clicks</th>
             <th className="py-3 px-4">Created Date</th>
           </tr>
         </thead>

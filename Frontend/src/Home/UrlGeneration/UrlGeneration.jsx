@@ -20,6 +20,7 @@ function UrlGeneration() {
         "http://localhost:5000/url/urlShortner",
         {
           url: inputUrl,
+          Email: localStorage.getItem("Email"),
         }
       );
       setUniqueId(response.data.id);
@@ -59,6 +60,7 @@ function UrlGeneration() {
               <button
                 onClick={handleSubmit}
                 className="self-start text-white bg-blue-700 p-3 rounded-2xl text-lg font-bold"
+                disabled={inputUrl.length === 0}
               >
                 {load ? (
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -97,21 +99,6 @@ function UrlGeneration() {
               {/* Right: QR + Copy */}
               <div className="flex flex-col items-center">
                 <Qrcode shortUrl={`http://localhost:5000/url/${uniqueId}`} />
-                <a
-                  // href={
-                  //   <Qrcode
-                  //     shortUrl={`http://localhost:5000/url/${uniqueId}`}
-                  //   />
-                  // }
-                  // download={
-                  //   <Qrcode
-                  //     shortUrl={`http://localhost:5000/url/${uniqueId}`}
-                  //   />
-                  // }
-                  className="mt-2 inline-block px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 text-center"
-                >
-                  Download QR Code
-                </a>
               </div>
             </div>
           </div>

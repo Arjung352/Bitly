@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const urlSchema = new mongoose.Schema(
   {
+    email: {
+      type: String,
+      required: true,
+    },
     shortId: {
       type: String,
       required: true,
