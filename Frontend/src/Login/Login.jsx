@@ -24,7 +24,7 @@ function Login() {
     e.preventDefault();
     setLoad(true);
     axios
-      .post("http://localhost:5000/checkUser/login", formData)
+      .post("https://bitly-six.vercel.app/checkUser/login", formData)
       .then((response) => {
         setFormData({ Email: "", Password: "" });
         localStorage.setItem("Email", formData.Email);

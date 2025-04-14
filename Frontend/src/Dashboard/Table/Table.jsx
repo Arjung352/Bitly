@@ -14,7 +14,7 @@ function Table({ userData }) {
     if (userData && userData.length > 0) {
       const formattedData = userData.map((data) => ({
         originalUrl: data.redirectUrl,
-        shortUrl: `http://localhost:5000/url/${data.shortId}`,
+        shortUrl: `https://bitly-six.vercel.app/url/${data.shortId}`,
         totalClicks: data.visitHistory.length,
         createdAt: new Date(data.createdAt).toLocaleDateString(),
       }));
