@@ -65,59 +65,59 @@ Here’s a breakdown of the updated project structure:
 
 ```plaintext
 arjung352-bitly/
-├── README.md # Project documentation
-├── Backend/ # Backend codebase
-│ ├── package-lock.json # Dependency lock file
-│ ├── package.json # Backend dependencies and scripts
-│ ├── vercel.json # Vercel deployment configuration
-│ ├── .gitignore # Git ignored files list
+├── README.md                       # Project documentation
+├── Backend/                        # Backend codebase
+│ ├── package-lock.json             # Dependency lock file
+│ ├── package.json                  # Backend dependencies and scripts
+│ ├── vercel.json                   # Vercel deployment configuration
+│ ├── .gitignore                    # Git ignored files list
 │ ├── api/
-│ │ └── index.js # Entry point for Vercel serverless function
+│ │ └── index.js                    # Entry point for Vercel serverless function
 │ ├── controllers/
-│ │ └── Url.js # Business logic for URL generation & analytics
+│ │ └── Url.js                      # Business logic for URL generation & analytics
 │ ├── models/
-│ │ └── urlModel.js # Mongoose schema/model for URLs
+│ │ └── urlModel.js                 # Mongoose schema/model for URLs
 │ └── routes/
-│ ├── LoginRoute.js # Login/authentication route
-│ └── UrlRoute.js # Route to handle URL operations
-├── Frontend/ # Frontend codebase
-│ ├── README.md # Frontend-specific documentation (if any)
-│ ├── eslint.config.js # Linting configuration
-│ ├── index.html # HTML template used by Vite
-│ ├── package-lock.json # Dependency lock file
-│ ├── package.json # Frontend dependencies and scripts
-│ ├── vite.config.js # Vite bundler configuration
-│ ├── .gitignore # Git ignored files for frontend
-│ ├── public/ # Static assets (e.g., icons, images)
-│ └── src/ # Source code for frontend
-│ ├── Dashboard/ # Analytics dashboard components
-│ │ ├── Dashboard.jsx # Main dashboard layout
+│ ├── LoginRoute.js                 # Login/authentication route
+│ └── UrlRoute.js                   # Route to handle URL operations
+├── Frontend/                       # Frontend codebase
+│ ├── README.md                     # Frontend-specific documentation (if any)
+│ ├── eslint.config.js              # Linting configuration
+│ ├── index.html                    # HTML template used by Vite
+│ ├── package-lock.json             # Dependency lock file
+│ ├── package.json                  # Frontend dependencies and scripts
+│ ├── vite.config.js                # Vite bundler configuration
+│ ├── .gitignore                    # Git ignored files for frontend
+│ ├── public/                       # Static assets (e.g., icons, images)
+│ └── src/                          # Source code for frontend
+│ ├── Dashboard/                    # Analytics dashboard components
+│ │ ├── Dashboard.jsx               # Main dashboard layout
 │ │ └── Table/
-│ │ ├── Pagination.jsx # Handles paginated views
-│ │ └── Table.jsx # Table view of shortened URLs
+│ │ ├── Pagination.jsx              # Handles paginated views
+│ │ └── Table.jsx                   # Table view of shortened URLs
 │ ├── Footer/
-│ │ └── Footer.jsx # Footer component
-│ ├── Home/ # Home page components
-│ │ ├── Home.jsx # Landing page
+│ │ └── Footer.jsx                  # Footer component
+│ ├── Home/                         # Home page components
+│ │ ├── Home.jsx                    # Landing page
 │ │ ├── FAQ/
-│ │ │ ├── FAQ.css # FAQ styling
-│ │ │ └── FAQ.jsx # FAQ section component
+│ │ │ ├── FAQ.css                   # FAQ styling
+│ │ │ └── FAQ.jsx                   # FAQ section component
 │ │ └── UrlGeneration/
-│ │ ├── UrlGeneration.jsx # URL shortener form and logic
+│ │ ├── UrlGeneration.jsx           # URL shortener form and logic
 │ │ └── Qrcode/
-│ │ └── Qrcode.jsx # QR code generator component
+│ │ └── Qrcode.jsx                  # QR code generator component
 │ ├── Login/
-│ │ └── Login.jsx # Login page & authentication logic
+│ │ └── Login.jsx                   # Login page & authentication logic
 │ ├── main/
-│ │ ├── App.jsx # Main app layout and route definitions
-│ │ ├── index.css # Global styles
-│ │ ├── LoadingSpinner.jsx # Loading spinner component
-│ │ └── main.jsx # Entry point of React application
+│ │ ├── App.jsx                     # Main app layout and route definitions
+│ │ ├── index.css                   # Global styles
+│ │ ├── LoadingSpinner.jsx          # Loading spinner component
+│ │ └── main.jsx                    # Entry point of React application
 │ ├── Navbar/
-│ │ └── Navbar.jsx # Navigation bar component
-│ └── Redux/ # Redux state management
+│ │ └── Navbar.jsx                  # Navigation bar component
+│ └── Redux/                        # Redux state management
 │ ├── Slice/
-│ │ └── UserSlice.js # Redux slice for user authentication
+│ │ └── UserSlice.js                # Redux slice for user authentication
 │ └── Store/
-│ └── Store.js # Redux store configuration
+│ └── Store.js                      # Redux store configuration
 ```
