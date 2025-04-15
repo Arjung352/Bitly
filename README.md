@@ -59,8 +59,11 @@ cd ../Backend
 npm install
 ```
 
-## File Strcuture📁📂
+## 📂 Directory Structure
 
+Here’s a breakdown of the updated project structure:
+
+```plaintext
 arjung352-bitly/
 ├── README.md # Project documentation
 ├── Backend/ # Backend codebase
@@ -117,3 +120,4 @@ arjung352-bitly/
 │ │ └── UserSlice.js # Redux slice for user authentication
 │ └── Store/
 │ └── Store.js # Redux store configuration
+```
