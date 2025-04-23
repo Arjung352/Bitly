@@ -7,7 +7,7 @@ function Footer() {
       <div className="flex justify-between my-10 font-sans max-md:mx-4 mx-8 max-md:flex-col max-md:items-center max-md:gap-5">
         <div className="flex flex-col items-center justify-center text-center max-md:flex-col max-md:items-center max-md:justify-center">
           <img
-            src="https://docrdsfx76ssb.cloudfront.net/wp-content/themes/JointsWP-CSS-master/assets/scripts/pcta/logo.svg"
+            src="https://res.cloudinary.com/dzrjja888/image/upload/v1745397886/icon-256x256-removebg-preview_uwowyq.png"
             className="h-20"
             alt="Logo"
           />
