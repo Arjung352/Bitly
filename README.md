@@ -1,4 +1,4 @@
-# 🔗 Bitly – Link Shortener & Analytics Dashboard
+# 🔗 Shortify – Link Shortener & Analytics Dashboard
 
 Bitly is a full-stack Micro-SaaS application that allows users to shorten long URLs, generate QR codes, and track detailed analytics like total clicks, devices used, and geolocation. Designed to be minimal, powerful, and developer-friendly.
 
