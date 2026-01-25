@@ -2,11 +2,9 @@ import { TextField } from "@material-ui/core";
 import { useState } from "react";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
-import LoadingSpinner from "../main/LoadingSpinner";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../Redux/Slice/UserSlice";
 import { useNavigate } from "react-router-dom";
-import { red } from "@mui/material/colors";
 
 function Login() {
   const dispatch = useDispatch();

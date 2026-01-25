@@ -35,7 +35,7 @@ function Admin() {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          `https://bitly-six.vercel.app/url/userinfo/${email}`
+          `https://bitly-six.vercel.app/url/userinfo/${email}`,
         );
         const urls = res.data.UserInfo || [];
 
@@ -80,7 +80,7 @@ function Admin() {
             totalEnteries: count,
           }))
           .sort(
-            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
           );
 
         setDashboardData({
@@ -154,7 +154,7 @@ function Admin() {
                   }}
                   options={{
                     responsive: true,
-                    elements: { line: { tension: 1 } },
+                    elements: { line: { tension: 0.5 } },
                     plugins: {
                       title: {
                         display: true,
@@ -184,10 +184,10 @@ function Admin() {
                         backgroundColor: Object.keys(deviceData).map(
                           () =>
                             `rgba(${Math.floor(
-                              Math.random() * 256
+                              Math.random() * 256,
                             )}, ${Math.floor(
-                              Math.random() * 256
-                            )}, ${Math.floor(Math.random() * 256)}, 0.8)`
+                              Math.random() * 256,
+                            )}, ${Math.floor(Math.random() * 256)}, 0.8)`,
                         ),
                         borderColor: "rgba(0,0,0,0.5)",
                         borderWidth: 2,
