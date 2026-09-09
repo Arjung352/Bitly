@@ -10,8 +10,8 @@ function Login() {
   const dispatch = useDispatch();
   const redirect = useNavigate();
   const [formData, setFormData] = useState({
-    Email: "",
-    Password: "",
+    Email: "intern@dacoid.com",
+    Password: "Test123",
   });
   const [load, setLoad] = useState(false);
   const handleInputChange = (e) => {
@@ -32,7 +32,6 @@ function Login() {
         redirect("/");
       })
       .catch((error) => {
-        setFormData({ Email: "", Password: "" });
         toast.error("Email or Password is Incorrect");
         setLoad(false);
       });
@@ -51,6 +50,9 @@ function Login() {
         <h3 className="text-sm text-gray-600 text-center mb-6">
           Log-in to get to work & manage your account.
         </h3>
+        <div className="mb-4 rounded-lg border border-blue-200 bg-blue-50/80 px-3 py-2 text-center text-blue-700 text-sm">
+          Demo credentials: intern@dacoid.com / Test123
+        </div>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
@@ -61,6 +63,7 @@ function Login() {
             name="Email"
             onChange={handleInputChange}
             fullWidth
+            disabled
           />
           <TextField
             variant="outlined"
@@ -71,6 +74,7 @@ function Login() {
             value={formData.Password}
             name="Password"
             fullWidth
+            disabled
           />
           <button
             type="submit"
